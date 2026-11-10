@@ -9,7 +9,8 @@ change.
 
 ## Current Goal
 
-- Authentication from `context/feature-specs/03-auth.md` is complete.
+- Project dialogs and editor home from
+  `context/feature-specs/04-project-dialogs.md` are complete.
 
 ## Completed
 
@@ -34,6 +35,12 @@ change.
   layout, form-only mobile layout, and Clerk's built-in form components.
 - Added Clerk's default `UserButton` to the editor navbar right section without
   replacing or customizing its profile and sign-out flows.
+- Added the minimal `/editor` home prompt and wired its New Project action to
+  the create-project dialog.
+- Added mock owned and shared project lists, with rename/delete actions limited
+  to owned projects and a mobile-only dismissible sidebar scrim.
+- Added a dedicated project-dialog hook for dialog, form, and loading state,
+  including live slug generation and create/rename/delete flows.
 
 ## In Progress
 
@@ -41,7 +48,7 @@ change.
 
 ## Next Up
 
-- Implement the project dialogs from `context/feature-specs/04-project-dialogs.md`.
+- Implement Prisma setup from `context/feature-specs/05-prisma.md`.
 
 ## Open Questions
 
@@ -83,4 +90,7 @@ change.
 - Authentication implementation started on 2026-11-09. Provider, root redirect,
   dependency, route protection, auth UI, and editor user menu are complete.
 - Authentication validation passed: `npm run lint`,
+  `npx tsc --noEmit --incremental false`, and `npm run build`.
+- Project dialogs and editor home implementation completed on 2026-11-10.
+- Project-dialog validation passed: `npm run lint`,
   `npx tsc --noEmit --incremental false`, and `npm run build`.
