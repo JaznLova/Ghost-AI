@@ -9,7 +9,7 @@ change.
 
 ## Current Goal
 
-- Editor chrome from `context/feature-specs/02-editor.md` is complete.
+- Authentication from `context/feature-specs/03-auth.md` is complete.
 
 ## Completed
 
@@ -24,6 +24,16 @@ change.
   control, project tabs, empty states, and full-width new-project action.
 - Confirmed the existing token-based dialog primitives support composed titles,
   descriptions, and footer actions without adding an actual dialog.
+- Installed `@clerk/ui` and wrapped the root layout in `ClerkProvider` using its
+  dark theme and the app's existing CSS variables.
+- Added root `proxy.ts` with public auth-route matching and default protection
+  for all other application and API routes.
+- Updated `/` to redirect signed-in users to `/editor` and signed-out users to
+  `/sign-in`.
+- Added responsive sign-in and sign-up pages with a minimal two-panel desktop
+  layout, form-only mobile layout, and Clerk's built-in form components.
+- Added Clerk's default `UserButton` to the editor navbar right section without
+  replacing or customizing its profile and sign-out flows.
 
 ## In Progress
 
@@ -31,11 +41,14 @@ change.
 
 ## Next Up
 
-- Select and implement the next feature specification after `02-editor.md`.
+- Implement the project dialogs from `context/feature-specs/04-project-dialogs.md`.
 
 ## Open Questions
 
-- None for the editor-chrome unit.
+- `.env.local` currently contains Clerk's publishable and secret keys but does
+  not set the optional sign-in/sign-up URL variables. The implementation reads
+  Clerk's canonical variables and safely defaults to the specified `/sign-in`
+  and `/sign-up` paths.
 
 ## Architecture Decisions
 
@@ -49,6 +62,13 @@ change.
   open state and close callback.
 - Position the project sidebar below the 3.5rem navbar with fixed positioning so
   opening it overlays the future canvas instead of changing page layout.
+- Protect all routes by default in Clerk proxy and treat only the configured
+  sign-in/sign-up paths (including nested auth flow paths) as public.
+- Keep the auth shell presentation separate from Clerk's built-in forms so
+  Clerk continues to own account, profile, and authentication behavior.
+- Mark Clerk session-dependent routes as non-instant and wrap Clerk's browser
+  auth forms in local Suspense boundaries, following the installed Next.js
+  16.4 Cache Components guidance.
 
 ## Session Notes
 
@@ -59,4 +79,8 @@ change.
   `cn()` runtime class-merging check, and `npm run build`.
 - Editor chrome implementation completed on 2026-11-09.
 - Editor validation passed: `npm run lint`,
+  `npx tsc --noEmit --incremental false`, and `npm run build`.
+- Authentication implementation started on 2026-11-09. Provider, root redirect,
+  dependency, route protection, auth UI, and editor user menu are complete.
+- Authentication validation passed: `npm run lint`,
   `npx tsc --noEmit --incremental false`, and `npm run build`.
