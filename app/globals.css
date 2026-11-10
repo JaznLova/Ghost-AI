@@ -14,13 +14,6 @@ body {
   min-height: 100%;
 }
 
-.center {
-  display: grid;
-  min-height: 100vh;
-  place-items: center;
-  font-family: Arial, sans-serif;
-}
-
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);
